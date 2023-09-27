@@ -7,8 +7,8 @@ from LinearCode import LinearCode
 def latin_square_to_code(ls: LatinSquare) -> LinearCode:
     codewords = []
 
-    for row in range(ls.dimension):
-        for col in range(ls.dimension):
+    for row in range(ls.size):
+        for col in range(ls.size):
             codewords.append(str(row) + str(col) + str(ls.square[row][col]))
 
     return LinearCode(codewords)

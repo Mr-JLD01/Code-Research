@@ -2,7 +2,7 @@
 class LatinSquare:
     def __init__(self, square: list[list[any]]):
         assert LatinSquare.is_latin_square(square)
-        self.dimension = len(square)
+        self.size = len(square)
         self.square = square
 
     @classmethod
@@ -34,7 +34,7 @@ class LatinSquare:
 
     def __str__(self) -> str:
         return_string = ""
-        return_string += "A {}-dimension Latin Square\n".format(self.dimension)
+        return_string += "A {}-dimension Latin Square\n".format(self.size)
         return_string += "="*50 + "\n"
         for row in self.square:
             return_string += str(row) + "\n"

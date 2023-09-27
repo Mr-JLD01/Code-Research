@@ -23,7 +23,7 @@ class QaryLatinSquare(LatinSquare):
 
     def __str__(self) -> str:
         return_string = ""
-        return_string += "A {0}-ary {1}x{1} Latin Square\n".format(self.q, self.dimension)  # noqa
+        return_string += "A {0}-ary {1}x{1} Latin Square\n".format(self.q, self.size)  # noqa
         return_string += "="*50 + "\n"
         for row in self.square:
             return_string += str(row) + "\n"

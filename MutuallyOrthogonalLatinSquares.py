@@ -5,11 +5,13 @@ class MutuallyOrthogonalLatinSquares:
     def __init__(self, mols: list[LatinSquare]):
         assert len(mols) > 1
         assert MutuallyOrthogonalLatinSquares.is_mutually_orthogonal_list(mols)
-        self.dimension = mols[0].dimension
+        self.dimension = mols[0].size
         self.mols = mols
         self.matrix = MutuallyOrthogonalLatinSquares.mols_matrix(mols)
 
     # FIXME - Doesn't work for even num_square
+    # LINK - https://math.stackexchange.com/questions/1624841/algorithms-for-mutually-orthogonal-latin-squares-a-correct-one  # noqa
+    # this function was taken from an answer in this forum
     @classmethod
     def find_mutually_orthogonal_latin_squares(cls, field: int, num_squares: int = 1) -> list[LatinSquare]:  # noqa
         mols = []
@@ -44,32 +46,30 @@ class MutuallyOrthogonalLatinSquares:
     def is_mutually_orthogonal(cls, square1: LatinSquare, square2: LatinSquare) -> bool:  # noqa
         overlay = []
         try:
-            assert square1.dimension == square2.dimension
-            for row in range(square1.dimension):
-                for col in range(square1.dimension):
+            assert square1.size == square2.size
+            for row in range(square1.size):
+                for col in range(square1.size):
                     overlay.append((square1.square[row][col], square2.square[row][col]))  # noqa
-            assert len(set(overlay)) == square1.dimension**2, "At least 1 point was repeated"  # noqa
+            assert len(set(overlay)) == square1.size**2, "At least 1 point was repeated"  # noqa
         except AssertionError as error:
             print(error)
             print(overlay)
             return False
         return True
 
-    # LINK - https://math.stackexchange.com/questions/1624841/algorithms-for-mutually-orthogonal-latin-squares-a-correct-one  # noqa
-    # this function was taken from an answer in this forum
     @classmethod
     def mols_matrix(cls, squares: list[LatinSquare]) -> list[list[tuple[any]]]:  # noqa
-        cartesian_product = []
-        for row in range(squares[0].dimension):
-            cartesian_row = []
-            for col in range(squares[0].dimension):
+        overlay = []
+        for row in range(squares[0].size):
+            overlay_row = []
+            for col in range(squares[0].size):
                 point = []
                 for ls in squares:
                     point.append(ls.square[row][col])
-                cartesian_row.append(tuple(point))
-            cartesian_product.append(cartesian_row)
+                overlay_row.append(tuple(point))
+            overlay.append(overlay_row)
 
-        return cartesian_product
+        return overlay
 
     def __str__(self) -> str:
         return_string = ""
