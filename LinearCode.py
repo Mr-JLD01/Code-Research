@@ -113,9 +113,15 @@ class LinearCode:
         # NOTE - Remove vector adds
         for word1 in gen_matrix:
             for word2 in gen_matrix:
-                vector_word = LinearCode.vector_add(word1, word2, q_field)
-                if vector_word in gen_matrix:
-                    gen_matrix.remove(vector_word)
+                for i in range(1, q_field):
+                    for j in range(1, q_field):
+                        s_word1 = LinearCode.scalar_mult(word1, i, q_field)
+                        s_word2 = LinearCode.scalar_mult(word2, j, q_field)
+                        vector_word = LinearCode.vector_add(s_word1, s_word2, q_field)  # noqa
+                        if vector_word in gen_matrix \
+                            and vector_word != word1 \
+                                and vector_word != word2:
+                            gen_matrix.remove(vector_word)
 
         return gen_matrix
 

@@ -32,6 +32,12 @@ if __name__ == "__main__":
     generates = "=======> Generates =======>\n"
     input_message = "Continue on? [y/n]"
 
+    # test_code = LinearCode(latin_square_to_code(LatinSquare([[0, 1, 2, 3], [1, 0, 3, 2], [2, 3, 0, 1], [3, 2, 1, 0]])))  # noqa))
+    # print(test_code)
+
+    # test_code = LinearCode(latin_square_to_code(LatinSquare([[0, 1, 2, 3], [3, 2, 1, 0], [1, 0, 3, 2], [2, 3, 0, 1]])))  # noqa))
+    # print(test_code)
+
     answer = ""
     while (answer != "y"):
         for q in range(2, 9):
@@ -59,6 +65,7 @@ if __name__ == "__main__":
             answer = input("Continue on? [y/n] :: ")
 
     # NOTE - Examples of not all MOLS create codes
+
     input()
     print("\n"*100)
     try:
