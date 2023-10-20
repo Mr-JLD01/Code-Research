@@ -1,4 +1,5 @@
 import math
+from LinearAlgebra import basis_over_n_field
 
 
 class LinearCode:
@@ -102,26 +103,13 @@ class LinearCode:
         q_field = int(max(max(codewords))) + 1
         gen_matrix = list(codewords)
 
-        gen_matrix.remove("0"*len_codeword)
-        # NOTE - Removes scalar mults
-        for word in gen_matrix:
-            for scalar in range(2, q_field):
-                scalar_word = LinearCode.scalar_mult(word, scalar, q_field)
-                if scalar_word in gen_matrix:
-                    gen_matrix.remove(scalar_word)
+        for row in range(len(gen_matrix)):
+            gen_matrix[row] = [int(x) for x in gen_matrix[row]]
 
-        # NOTE - Remove vector adds
-        for word1 in gen_matrix:
-            for word2 in gen_matrix:
-                for i in range(1, q_field):
-                    for j in range(1, q_field):
-                        s_word1 = LinearCode.scalar_mult(word1, i, q_field)
-                        s_word2 = LinearCode.scalar_mult(word2, j, q_field)
-                        vector_word = LinearCode.vector_add(s_word1, s_word2, q_field)  # noqa
-                        if vector_word in gen_matrix \
-                            and vector_word != word1 \
-                                and vector_word != word2:
-                            gen_matrix.remove(vector_word)
+        gen_matrix = basis_over_n_field(gen_matrix, q_field)
+
+        for row in range(len(gen_matrix)):
+            gen_matrix[row] = "".join(str(x) for x in gen_matrix[row])
 
         return gen_matrix
 
