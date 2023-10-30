@@ -139,19 +139,16 @@ class LinearCode:
 
 
 if __name__ == "__main__":
-    input()
     print("\n"*100)
     codewords = ["000", "011", "101", "110"]
     code_test = LinearCode(codewords)
     print(code_test)
 
-    input()
     print("\n"*100)
     codewords = ["0000", "0111", "0222", "1012", "1120", "1201", "2021", "2102", "2210"]  # noqa
     code_test = LinearCode(codewords)
     print(code_test)
 
-    input()
     print("\n"*100)
     codewords = ["00000", "10001", "01010", "00111", "11011", "10110", "01101", "11100"]  # noqa
     code_test = LinearCode(codewords)
