@@ -2,7 +2,7 @@ from MutuallyOrthogonalLatinSquares import MutuallyOrthogonalLatinSquares
 from QaryLatinSquare import QaryLatinSquare
 from LatinSquare import LatinSquare
 from LinearCode import LinearCode
-from LinearAlgebra import basis_over_n_field
+from LinearAlgebra import basis_over_n_field, transpose
 
 
 def latin_square_to_code(ls: LatinSquare) -> LinearCode:
@@ -128,8 +128,18 @@ if __name__ == "__main__":
 	[0, 0, 1, 0, 1, 0, 1, 0, 0]
     ]
 
-    # test_code = matrix_to_code(matrix, 2)
-    # print(test_code)
+    test_code = matrix_to_code(matrix, 2)
+    print(test_code)
+
+    matrix = transpose(matrix)
+
+    test_code = matrix_to_code(matrix, 2)
+    print(test_code)
+
+    matrix.append([1]*(len(matrix[0])))
+
+    test_code = matrix_to_code(matrix, 2)
+    print(test_code)
 
     matrix = [
             [1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
@@ -211,19 +221,24 @@ if __name__ == "__main__":
         [0, 1, 0, 1, 0, 1]
     ]
 
-    test_code = matrix_to_code(matrix, 2)
-    print(test_code)
+    t_mat = transpose(matrix)
+
+    # test_code = matrix_to_code(matrix, 2)
+    # print(test_code)
 
     matrix = [
-        [1, 1, 1, 0, 0, 0],
-        [1, 0, 0, 0, 1, 1],
+        [1, 0, 1, 0, 0, 1],
+        [1, 0, 0, 1, 1, 0],
+        [0, 1, 1, 0, 1, 0],
         [0, 1, 0, 1, 0, 1],
-        [0, 0, 1, 1, 1, 0],
         [1, 1, 1, 1, 1, 1]
     ]
 
     test_code = matrix_to_code(matrix, 2)
     print(test_code)
+
+    # test_code = matrix_to_code(t_mat, 2)
+    # print(test_code)
 
 
     # answer = ""
